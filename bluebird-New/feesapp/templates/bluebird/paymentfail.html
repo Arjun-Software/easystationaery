@@ -1,0 +1,84 @@
+{% extends "bluebird/base.html" %}
+{% block content %}
+{% load static %}
+<body>
+    <style>
+        #success-main {
+            padding-top: 20px;
+            height: auto;
+        }
+        .success-details h4 {
+            color: #29964c;
+            margin: 0px;
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        span {
+            font-size: 18px;
+            font-weight: 500;
+            color: gray;
+        }
+
+        
+
+
+        @keyframes zoominoutsinglefeatured {
+            0% {
+                transform: scale(1, 1);
+            }
+
+            50% {
+                transform: scale(1.1, 1.1);
+            }
+
+            100% {
+                transform: scale(1, 1);
+            }
+        }
+
+        .cardcontainer img {
+            animation: zoominoutsinglefeatured 1s infinite;
+        }
+    </style>
+    
+    <div id="contact" class="contact_section">
+        <div class="contact_section_2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input_main">
+                            <div class="container">
+                                <center>
+                                    <div class="col-md-3"></div>
+                                    <section id="success-main">
+                                        <div class="">
+                                            <div class="cardcontainer">
+                                                <!-- <img class="galleryImg" src="https://www.google.com/logos/doodles/2014/2014-winter-olympics-5710368030588928-hp.jpg"> -->
+                                            <img src="{% static 'bluebird/img/faild.png' %}" width="150px">
+                                        </div>
+                                    <br>
+                                            <div class="success-details">
+                                                <h4 style="color: #741111;">Payment Faild</h4>
+                                                <span >{{context}}</span><br>
+                                                <div class="btn_main">
+                                                    <button type="button" class="read_bt"><a href="{% url 'all_college' %}">Go Home</a></button>
+                                                </div>
+                                            </div>
+                                        
+                                        </div>
+                                    </section>
+                                    <div class="col-md-3"></div>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}  
+
+
+   

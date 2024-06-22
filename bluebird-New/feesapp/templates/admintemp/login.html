@@ -1,0 +1,222 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- mobile metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- site metas -->
+    <title>Blue Bird High School Login Panel</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- site icon -->
+    <link rel="icon" href="{% static 'adminstat/images/fevicon.png' %}" type="image/png" />
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="{% static 'adminstat/css/bootstrap.min.css' %}" />
+    <!-- site css -->
+    <link rel="stylesheet" href="{% static 'adminstat/css/style.css' %}" />
+    <!-- responsive css -->
+    <link rel="stylesheet" href="{% static 'adminstat/css/responsive.css' %}" />
+    <!-- color css -->
+    <link rel="stylesheet" href="{% static 'adminstat/css/colors.css' %}" />
+    <!-- select bootstrap -->
+    <link rel="stylesheet" href="{% static 'adminstat/css/bootstrap-select.css' %}" />
+    <!-- scrollbar css -->
+    <link rel="stylesheet" href="{% static 'adminstat/css/perfect-scrollbar.css' %}" />
+    <!-- custom css -->
+    <link rel="stylesheet" href="{% static 'adminstat/css/custom.css' %}" />
+    <!-- calendar file css -->
+    <link rel="stylesheet" href="{% static 'js/semantic.min.css' %}" />
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
+</head>
+
+<body class="inner_page login">
+    <div class="full_container">
+        <div class="container">
+            <div class="center verticle_center full_height">
+                <div class="login_section">
+                    <div class="logo_login">
+                        <div class="center">
+                            <img class="img-responsive" src="{% static 'adminstat/images/logo/logo.png' %}" alt="#" />
+                        </div>
+                    </div>
+                    <div class="login_form">
+                        <form action="/panel/login/" method="post">
+                            {% csrf_token %}
+                            {% if error%}
+                            <div class="alert alert-danger" role="alert">
+                                {{error}}
+                            </div>
+                            {% endif %}
+                            <fieldset class="col-sm-12 float-sm-right form-control">
+                                <div class="form-group">
+                                    <label class="label_field">User Name</label>
+                                    <input type="email" class="form-control" name="email" placeholder="E-mail" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="label_field">Password</label>
+                                    <input type="password" class="form-control" name="password"
+                                        placeholder="Password" />
+                                </div>
+                                <div class="form-group ">
+                                    <label class="label_field hidden">hidden label</label>
+                                    <label class="form-check-label"><input type="checkbox" class="form-check-input">
+                                        Remember Me</label>
+                                    <a class="forgot" href="">Forgotten Password?</a>
+                                </div>
+                                <div class="field margin_0">
+                                    <label class="label_field hidden">hidden label</label>
+                                    <button class="main_bt">Sign In</button>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- jQuery -->
+    <script src="{% static 'adminstat/js/jquery.min.js' %}"></script>
+    <script src="{% static 'adminstat/js/popper.min.js' %}"></script>
+    <script src="{% static 'adminstat/js/bootstrap.min.js' %}"></script>
+    <!-- wow animation -->
+    <script src="{% static 'adminstat/js/animate.js' %}"></script>
+    <!-- select country -->
+    <script src="{% static 'adminstat/js/bootstrap-select.js' %}"></script>
+    <!-- nice scrollbar -->
+    <script src="{% static 'adminstat/js/perfect-scrollbar.min.js' %}"></script>
+    <script>
+        var ps = new PerfectScrollbar('#sidebar');
+    </script>
+    <!-- custom js -->
+    <script src="{% static 'adminstat/js/custom.js' %}"></script>
+</body>
+
+</html>
+<style>
+    /*------------------------------------------------------------------
+    25. Login Section
+-------------------------------------------------------------------*/
+
+    .login {
+        background: #eee;
+    }
+
+    .full_height {
+        height: 100vh;
+    }
+
+    .login_section {
+        max-width: 640px;
+        background: #fff;
+        min-height: 540px;
+        width: 100%;
+        box-shadow: 0px 0 10px -8px #000;
+        margin: 0px;
+        padding: 0;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .logo_login {
+        background: url('images/layout_img/login_image.jpg');
+        padding: 50px 0;
+        background-position: center center;
+        position: relative;
+    }
+
+    .logo_login::after {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgba(21, 40, 60, .8);
+        top: 0px;
+        left: 0;
+    }
+
+    .logo_login div {
+        position: relative;
+        z-index: 1;
+    }
+
+    .login_form {
+        padding: 50px 50px;
+        float: left;
+        width: 100%;
+    }
+
+    .login_form form {
+        float: left;
+        width: 100%;
+    }
+
+    .login_form form .field {
+        display: flex;
+        margin: 0;
+    }
+
+    .login_form form .field label.label_field {
+        margin: 0 30px 0 0;
+        width: 115px;
+        line-height: 45px;
+        text-align: right;
+        height: 45px;
+        font-weight: 300;
+        font-size: 15px;
+    }
+
+    .login_form form .field {
+        display: block;
+        margin: 0 0 20px;
+    }
+
+    .login_form form .field input {
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: solid #ddd 2px;
+        width: 395px;
+        float: right;
+        padding: 10px;
+        line-height: normal;
+        font-weight: 300;
+        transition: ease all 0.5s;
+    }
+
+    .login_form form .field input:hover,
+    .login_form form .field input:focus {
+        box-shadow: none;
+    }
+
+    .login_form .field label.form-check-label .form-check-input {
+        width: auto;
+    }
+
+    .hidden {
+        visibility: hidden;
+    }
+
+    .login_form .field label.form-check-label {
+        margin-left: 20px;
+        position: relative;
+        top: 0;
+    }
+
+    .forgot {
+        float: right;
+        margin: 11px 0;
+        position: relative;
+        left: 0;
+        color: #ff5722;
+    }
+</style>

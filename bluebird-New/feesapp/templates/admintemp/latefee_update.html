@@ -1,0 +1,90 @@
+{% extends "admintemp/base.html" %}
+
+{% block content %}
+{% load static%}
+<!-- end topbar -->
+<div class="row column2 graph margin_bottom_30">
+    <div class="col-md-l2 col-lg-12">
+        <div class="white_shd full">
+            <div class="full graph_head">
+                <div class="heading1 margin_0">
+                    <h2>Update New Item&#39;s</h2>
+                </div>
+            </div>
+            <div class="full graph_revenue">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="content">
+                            <link rel="stylesheet"
+                                href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+                            <link rel="stylesheet"
+                                href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+                            <form action="/panel/latefee/" method="post" class="form-group1">
+                                {% csrf_token %}
+                                <div class="form-group row">
+                                    <div class="col-6">
+                                        <label for="type" class="col-4 col-form-label">Late Fees Type</label>
+                                        <select id="type" name="type" class="custom-select">
+                                            <option value="{{ latefee.type }}">{{ latefee.type }}</option>
+                                            {% if latefee.type != "perday" %}
+                                            <option value="perday">Per Day</option>
+                                            {% endif %}
+                                            {% if latefee.type != "percentage" %}
+                                            <option value="percentage">Percentage Wise</option>
+                                            {% endif %}
+                                            {% if latefee.type != "fixamount" %}
+                                            <option value="fixamount">Fix amount</option>
+                                            {% endif %}
+                                        </select>
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="fee" class="col-form-label">Enter Fee amount/percentage</label>
+                                        <input id="fees" value="{{ latefee.fees }}" name="fees"
+                                            placeholder="Enter amount or percentage" type="number" class="form-control"
+                                            required>
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="fee" class="col-4 col-form-label">Last Date</label>
+                                        <input id="lastdate" value="{{ latefee.lastdate}}" name="lastdate"
+                                            placeholder="Enter Late Fees Last Date" type="date" class="form-control"
+                                            required>
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="fee" class="col-4 col-form-label">Last Date</label>
+                                        <input id="installment" value="{{ latefee.installment }}" name="installment"
+                                            placeholder="Enter Installment Name" type="text" class="form-control"
+                                            required>
+                                    </div>
+                                    <div>
+                                        <div class="form-group row">
+                                            <div class="col-6">
+                                                <label for="status" class="col-6">Status Active/Deactivate</label>
+                                                <div class="custom-control custom-checkbox custom-control-inline">
+                                                    {% if latefee.status %}
+                                                    <input name="status" id="status" type="checkbox" value="True"
+                                                        checked>
+                                                    {% else %}
+                                                    <input name="status" id="status" type="checkbox" value="True">
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <div class="center mt-3">
+                                            <input hidden name="id" , id="id" value="{{ latefee.id }}">
+                                            <button name="btn" type="submit" class="btn btn-primary" value="put"
+                                                style="background-color: #1ed085;">Update</button>
+                                            <button name="btn" type="submit" class="btn btn-danger" value="delete"
+                                                style="background-color: #FF0000; margin-left:20px">Delete</button>
+                                        </div>
+                                    </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

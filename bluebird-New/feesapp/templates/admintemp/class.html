@@ -1,0 +1,101 @@
+{% extends "admintemp/base.html" %}
+
+{% block content %}
+{% load static%}
+                <!-- end topbar -->
+                <div class="row column2 graph margin_bottom_30">
+                    <div class="col-md-l2 col-lg-12">
+                        <div class="white_shd full">
+                            {% comment %} <div class="full graph_head">
+                                <div class="heading1 margin_0">
+                                    <h2>Update New Item&#39;s</h2>
+                                </div>
+                            </div> {% endcomment %}
+                            <div id="AddClass" class="modal fade" role="dialog">
+                                <div class="row modal-dialog">
+                                    <div class="col-md-12 modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Add New Classes</h4>
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+                                        <div class="content modal-body">
+                                            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+                                            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+                                            <form action="" method="post" class="form-group1">
+                                                {% csrf_token %}
+                                                <div class="form-group row">
+                                                    <label for="class" class="col-6 col-form-label">Class Name</label>
+                                                    <div class="col-6 col-sm-12">
+                                                        <input id="class" name="class_name" placeholder="Enter Your class Name" type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="Class" class="col-4 col-form-label">School</label>
+                                                    <div class="col-8">
+                                                        <select id="school" name="school" class="custom-select">
+                                                        {% for sc in school %}
+                                                        <option value="{{ sc.id }},{{ sc.school_name }}">{{ sc.school_name }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group col-md-12 modal-footer">
+                                                    <div class="center mt-3">
+                                                        <button name="btn" type="submit" value="post" class="btn btn-primary">Submit</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="midde_cont">
+                    <div class="container-fluid">
+                       <!-- row -->
+                        <div class="row">
+
+                            <!-- table section -->
+                            <div class="col-md-12">
+                                <div class="white_shd full margin_bottom_30">
+                                    <div class="full graph_head">
+                                        <div class="row m-1">
+                                            <h2 class="col-md-8">List of Classes</h2>
+                                            <div class="col-md-4">
+                                                <button type="button" data-toggle="modal" data-target="#AddClass" class="btn btn-primary" style="background-color: #1ed085;">Add New Class</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="table_section padding_infor_info">
+                                        <div class="table-responsive-sm">
+                                            <table class="table table-striped table-hover table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Class Name</th>
+                                                        <th>school</th>
+                                                        <th>Edit</th>
+                                                        
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for class in classes %}
+                                                    <tr>
+                                                        <td>{{ class.class_name }}</td>
+                                                        <td>{{ class.school_id }}</td>
+                                                        <td>
+                                                            <a href="{{ class.id }}"><label class="fa fa-pencil-square-o blue_color p-2" name="update" aria-hidden="true"></label></a>
+                                                        </td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+{% endblock %}
+                

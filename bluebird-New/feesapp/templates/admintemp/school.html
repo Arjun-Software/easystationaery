@@ -1,0 +1,101 @@
+{% extends "admintemp/base.html" %}
+
+{% block content %}
+{% load static%}
+                <!-- end topbar -->
+                <div class="row column2 graph margin_bottom_30">
+                    <div class="col-md-l2 col-lg-12">
+                        <div class="white_shd full">
+                            <div class="full graph_head">
+                                <div class="heading1 margin_0">
+                                    <h2>Add New School&#39;s</h2>
+                                </div>
+                            </div>
+                            <div class="full graph_revenue">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="content">
+                                            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+                                            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+                                            <form action="" method="post" class="form-group1" enctype="multipart/form-data">
+                                                {% csrf_token %}
+                                                <div class="form-group row">
+                                                    <label for="School" class="col-6 col-form-label">School Name</label>
+                                                    <div class="col-6">
+                                                        <input id="School" name="school_name" placeholder="Enter Your School Name" type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="discription" class="col-6 col-form-label">School Discription</label>
+                                                    <div class="col-6">
+                                                        <input id="discription" name="school_discription" placeholder="Enter Your School Details" type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="logo" class="col-6 col-form-label">School Logo</label>
+                                                    <div class="col-6">
+                                                        <input type="file" accept="image/png, image/jpeg" class="form-control" name="school_logo"><br>
+                                                        {% comment %} <input type="file" class="dropify" onchange="readURL1(this);" id="Image[]" name="Image[]"> {% endcomment %}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="offset-5 col-6">
+                                                        <button name="btn" type="submit" value="post" class="btn btn-primary">Submit</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="midde_cont">
+                    <div class="container-fluid">
+                       <!-- row -->
+                        <div class="row">
+
+                            <!-- table section -->
+                            <div class="col-md-12">
+                                <div class="white_shd full margin_bottom_30">
+                                    <div class="full graph_head">
+                                        <div class="heading1 margin_0">
+                                            <h2>All Schools</h2>
+                                        </div>
+                                    </div>
+                                    <div class="table_section padding_infor_info">
+                                        <div class="table-responsive-sm">
+                                            <table class="table table-striped table-hover table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>School Name</th>
+                                                        <th>Discription</th>
+                                                        <th>Logo</th>
+                                                        <th>Edit</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for sc in school %}
+                                                    <tr>
+                                                        <td>{{ sc.school_name }}</td>
+                                                        <td>{{ sc.school_discription }}</td>
+                                                        <td>
+                                                            <div class="logo_section">
+                                                                <img class="img-responsive" src="{{ sc.school_logo.url }}" alt="#" />
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <a href="{{ sc.id }}"><label class="fa fa-pencil-square-o blue_color p-1" name="update" aria-hidden="true"></label></a>
+                                                        </td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+{% endblock %}

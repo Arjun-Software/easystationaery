@@ -1,0 +1,359 @@
+{% extends "bluebird/base.html" %}
+{% block content %}
+{% load static%}
+{% load custom_filter %}
+
+<body>
+    <main class="background">
+        <!-- ======= admin-form Section ======= -->
+        <section id="contact" class="admin-form">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title col-md-12">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="{% static 'bluebird/img/logo.png' %}">
+                        </div>
+                        <div class="col-md-8">
+                            <h2>The Blue Bird High School</h2>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 mt-5 mt-lg-0 d-flex align-items-stretch" data-aos="fade-up"
+                        data-aos-delay="200">
+                        <form action="studentregistration/" method="post" role="form" class="email-form">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="name">Scholar No.</label>
+                                    <input type="text" name="scholar" class="form-control" id="scholar"
+                                        placeholder="Scholar No." value="{{student.scolar_no}}" readonly>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="name">Your Name</label>
+                                    <input type="text" name="name" class="form-control" id="name"
+                                        placeholder="Your Name" value="{{student.student_name}}" readonly>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6 mt-3 mt-md-0">
+                                    <label for="name">Father Name</label>
+                                    <input type="test" class="form-control" name="Father Name" id="Father Name"
+                                        placeholder="Father Name" value="{{student.father_name}}" readonly>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="name">Mother Name</label>
+                                    <input type="text" class="form-control" name="Mother Name" id="Mother Name"
+                                        placeholder="Mother Name" value="{{student.mother_name}}" readonly>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="name">Class</label>
+                                    <input type="text" class="form-control" name="class" id="class"
+                                        placeholder="Section" value="{{student.class_id}}" readonly>
+                                </div>
+                                {% if student.RTE|RTE %}
+                                <div class="form-group col-md-6 mt-3 mt-md-0">
+                                    <input type="checkbox" checked name="RTE" id="RTE" value="RTE"
+                                        onclick="return false" style="color:green">RTE
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6 mt-3 mt-md-0">
+                                <label style="color:green; margin-top:30px">This Student Comes in RTE</label>
+                            </div>
+                            {% else %}
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 m-5 mt-md-0 col-sm-12" id="frmContact">
+                            <span class="details">Please Select Your Installment</span>
+                            <ul style="list-style: none;padding-left: 5px; display: inline;">
+                                {% if remMon.installment1|nan %}
+                                <li>
+                                    <input class="installment1_click" type="checkbox" id="installment1"
+                                        style="display: none" onclick="Showinstallment1(this)"
+                                        value="{{feesStruct.installment1}},installment1" name="amount" />
+                                    1<sup>st</sup> Installment Fees (1<sup>st</sup> July to 20<sup>th</sup> July)
+                                    <input type="checkbox" style="visibility: collapse;" name="months"
+                                        value="installment1">
+
+                                    <div class="installment1_answer display-content">
+                                        <input type="number" class="amount-input" value="{{feesStruct.installment1}}"
+                                            onblur="findTotal()" id="installment1_amount " readonly />
+                                    </div>
+                                </li>
+                                {% endif %}
+                                {% if remMon.installment2|nan %}
+                                <li>
+                                    <input class="installment2_click" type="checkbox" id="installment2"
+                                        style="display: none" onclick="Showinstallment2(this)"
+                                        value="{{feesStruct.installment2}},installment2" name="amount" />
+                                    2<sup>nd</sup> Installment Fees (1<sup>st</sup> Oct to 20<sup>th</sup> Oct)
+                                    <input type="checkbox" style="visibility: collapse;" name="months"
+                                        value="installment2">
+
+                                    <div class="installment2_answer display-content">
+                                        <input type="number" class="amount-input" value="{{feesStruct.installment2}}"
+                                            onblur="findTotal()" id="installment2_amount " readonly />
+                                    </div>
+                                </li>
+                                {% endif %}
+                                {% if remMon.installment3|nan %}
+                                <li>
+                                    <input class="installment3_click" type="checkbox" id="installment3"
+                                        style="display: none" onclick="Showinstallment3(this)"
+                                        value="{{feesStruct.installment3}},installment3" name="amount" />
+                                    3<sup>rd</sup> Installment Fees (1<sup>st</sup> Feb to 20<sup>th</sup> Feb)
+                                    <input type="checkbox" style="visibility: collapse;" name="months"
+                                        value="installment3">
+
+                                    <div class="installment3_answer display-content">
+                                        <input type="number" class="amount-input" value="{{feesStruct.installment3}}"
+                                            onblur="findTotal()" id="installment3_amount" readonly />
+                                    </div>
+                                </li>
+                                {% endif %}
+                            </ul>
+                            <input type="hidden" id="type" value={{ latefee.type }}>
+                            <input type="hidden" id="fees" value={{ latefee.fees }}>
+                            <input type="hidden" id="lastdate" value={{ latefee.lastdate|date:"d,M" }}>
+                            <input type="hidden" id="installment" value={{ latefee.installment }}>
+                        </div>
+                    </div>
+                    <hr>
+                    <div>
+                        <input type="hidden" name="month" id="month">
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label for="name">Total Installment Fees :</label> <br>
+                                <input readonly type="text" style="padding: 6px !important; border-radius: 5px;"
+                                    placeholder="Total Installment fees Amount" name="totalamount" id="totalamount" />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="latefee">Late Fees :</label><br>
+                                <input readonly type="text" style="padding: 6px !important; border-radius: 5px;"
+                                    placeholder="Late fees" name="latefee" id="latefee" />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="total"> Total :</label><br>
+                                <input readonly type="text" style="padding: 6px !important; border-radius: 5px;"
+                                    placeholder="Total Amount" name="total" id="total" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+                    <script>
+                        var countChecked = function () {
+                            var arr = [];
+                            $.each($("input[name='amount']:checked"), function () {
+                                arr.push($(this).val());
+                            });
+                            var mon = [];
+                            var d = new Date();
+                            const month = ["installment1", "installment2", "installment3"];
+                            const type = document.getElementById('type').value;
+                            const installment = document.getElementById('installment').value;
+                            const fees = document.getElementById('fees').value;
+                            const lastdate = document.getElementById('lastdate').value;
+                            var premonthtot = 0;
+                            var previousmon = [];
+                            var ldate = lastdate.split(',')
+                            monthno = ldate[1].toLowerCase();
+                            var months = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
+                            monthno = months.indexOf(monthno);
+                            if (d.getDate() >= ldate[0] && d.getMonth() >= monthno) {
+                                previousmon.push("installment1");
+                                // TO DO October Late Fee
+                                //previousmon.push("installment2");
+                                // TO DO February Late Fee
+                                //previousmon.push("installment3");
+                            }
+
+                            console.log(arr, previousmon, premonthtot)
+                            var tot = 0;
+                            for (var i = 0; i < arr.length; i++) {
+                                a = arr[i].split(',')
+                                mon.push(a[1])
+                                tot = parseInt(arr[i]) + tot
+                                if (previousmon.includes(mon[i])) {
+                                    premonthtot = premonthtot + parseInt(arr[i])
+                                }
+                            }
+                            document.getElementById('month').value = mon.join()
+                            document.getElementById('totalamount').value = tot;
+
+                            console.log("---------------",type, installment, lastdate, d.getMonth(), monthno, d.getDate(), ldate[0])
+                            console.log(d.getDate() >= ldate[0] && d.getMonth() >= monthno)
+
+                            var latefee = 0;
+                            if (type == "perday") {
+                                if (d.getDate() >= ldate[0] && d.getMonth() >= monthno) {
+                                    for (var j = 0; j < mon.length; j++) {
+
+                                        for (var i = 0; i < d.getDate() - ldate[0]; i++) {
+                                            if (previousmon.includes(mon[j])) {
+                                                latefee = latefee + parseInt(fees)
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            if (type == "percentage") {
+                                for (var i = 0; i < mon.length; i++) {
+                                    if (d.getDate() >= ldate[0] && d.getMonth >= monthno) {
+                                        if (previousmon.includes(mon[i])) {
+                                            latefee = (premonthtot * parseInt(fees)) / 100
+                                        }
+                                    }
+                                }
+                            }
+                            if (type == "fixamount") {
+                                if (d.getDate() >= ldate[0] && d.getMonth() >= monthno) {
+                                    for (var j = 0; j < mon.length; j++) {
+
+                                            if (previousmon.includes(mon[j])) {
+                                                latefee = latefee + parseInt(fees)
+                                            }
+                                    }
+                                }
+                            }
+                            document.getElementById('latefee').value = latefee;
+                            document.getElementById('total').value = latefee + tot;
+                        };
+
+                        countChecked();
+                        $("input[type=checkbox]").on("click", countChecked);
+                        countChecked();
+                        $("input[type=checkbox]").on("click", countChecked);
+                        function clickme() {
+                            tot = document.getElementById('total').value
+                            console.log("hello", window.tot)
+                            if (window.tot == 0) {
+                                console.log("if")
+                                document.getElementById("submit").disabled = true;
+                                alert("please select month to proceed")
+                                window.location.reload();
+                            }
+                            else {
+                                console.log("else")
+                                document.getElementById("submit").disabled = false;
+                            }
+                        }
+                    </script>
+                    <div>
+                        <button class="submit-btn" onclick="clickme();" type="submit1" id="submit">Submit</button>
+                    </div>
+                </div>
+                {% endif %}
+                </form>
+            </div>
+            </div>
+            </div>
+        </section>
+        <!-- End Contact Us Section -->
+    </main>
+
+
+    <script>
+
+        //   installment1
+            function Showinstallment1(installment1) {
+            var installment2 = document.getElementById("installment2");
+            if (installment1.checked === true) {
+                installment2.style.display = "inline"
+            }
+            else {
+                document.getElementById('installment2').checked = false
+                document.getElementById('installment2').style.display = "none"
+                installment2.checked = false;
+                document.getElementById('installment3').checked = false
+                document.getElementById('installment3').style.display = "none"
+                // installment3.checked = false;
+                // document.getElementById('installment4').checked = false
+                // document.getElementById('installment4').style.display = "none"
+            }
+
+
+        }
+
+	// installment2
+
+        function Showinstallment2(installment2) {
+            var installment3 = document.getElementById("installment3");
+            if (installment2.checked === true) {
+                console.log("********yes")
+                installment3.style.display = "inline"
+            }
+            else {
+                document.getElementById('installment3').checked = false
+                document.getElementById('installment3').style.display = "none"
+               //  installment3.checked = false;
+                // document.getElementById('installment4').checked = false
+                // document.getElementById('installment4').style.display = "none"
+                // installment.checked = false;
+                // document.getElementById('installment4').checked = false
+                // document.getElementById('installment4').style.display = "none"
+            }
+
+	}
+
+	// installment3
+        function Showinstallment3(installment3) {
+            var installment1 = document.getElementById("installment1");
+            if (installment3.checked === true) {
+                installment1.style.display = "inline"
+            }
+            // else {
+            //     document.getElementById('installment4').checked = false
+            //     document.getElementById('installment4').style.display = "none"
+            // installment3.checked = false;
+            // document.getElementById('installment4').checked = false
+            // document.getElementById('installment4').style.display = "none"
+            // installment.checked = false;
+            // document.getElementById('installment4').checked = false
+            // document.getElementById('installment4').style.display = "none"
+            // }
+        }
+    </script>
+
+
+
+    <script>
+        $(document).ready(function () {
+                var scholar = document.getElementById('scholar')
+                var bla = $('#scholar').val();
+                console.log(scholar)
+                $.get("https://bluebird.feeszone.com/CheckEnroll/?enrollmentNo=" + bla, function (data, status) {
+                    // {% comment %} alert("Data: " + data + "\nStatus: " + status); {% endcomment %}
+                    for (const [key, value] of Object.entries(data)) {
+                        // console.log("keys",`${key}: "values", ${value}`);
+                        // console.log(value)
+                        // console.log(key)
+    
+                        if (value === "nan" || value === null) {
+                            console.log(key)
+                            console.log(`${key}`)
+                            var myId = `${key}`;
+                            var d = document.getElementById(myId).style.display = "inline"
+                            console.log(d)
+                            if (d === "inline") { break; }
+                            // d.style.display="visibility"
+                        }
+                    }
+    
+    
+                });
+    
+            });
+        </script>
+    
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        {% endblock %}
+    
+    
+    
+    

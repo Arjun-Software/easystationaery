@@ -1,0 +1,76 @@
+{% extends "bluebird/base.html" %}
+
+{% block content %}
+{% load static%}
+<body>
+    <main class="background">
+        <!-- ======= admin-form Section ======= -->
+        <section id="contact" class="admin-form">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title col-md-12">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="{% static 'bluebird/img/logo.png' %}">
+                        </div>
+                        <div class="col-md-8">
+                            <h2>Welcome to The Blue Bird High School</h2>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row col-md-12">
+                    <section class="email-form">
+                        <div class="inner-box">
+                            <div class="header-section text-center">
+                                <img src="{% static 'bluebird/img/logo.png' %}">
+                                <h5>The Blue Bird High School</h5>
+                                <h5>Download Receipt Here</h5>
+                            </div>
+                            <br>
+                            <div>
+                                <form id="form" action="" method="POST">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <div class="text-center">
+                                            <label for="enrollment">Enter your Scholar No.</label>
+                                            <input type="text" class="input-control" name="enrollmentNo" id="enrollmentNo" placeholder="Enter Your Scholar Number" />
+                                        </div>
+                                        {% if error%}
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="alert-danger text-center col-md-10" role="alert">
+                                                {{error}}
+                                            </div>
+                                            <div class="col-md-1"></div>
+                                        </div>
+                                        {% endif %}                                    </div>
+                                    <br>
+                                    <div style="text-align: center;">
+                                        <button class="submit-btn" type="submit">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </section>
+        <!-- End Contact Us Section -->
+    </main>
+    <!-- End #main -->
+    <div class="container fixed-bottom d-flex align-items-center justify-content-between">
+        <div class="col-md-12 col-lg-12 col-sm-12">
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li><a class="nav-link" href="https://www.bluebirdschools.com/contact.php">Contact Us</a></li>
+                    <li><a class="nav-link" href="https://www.bluebirdschools.com/about.php">About Us</a></li>
+                    <li><a class="nav-link" href="https://www.bluebirdschools.com/policy.php">Policies</a> </li>
+                   
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav>
+        </div>
+    </div>
+
+{% endblock %}

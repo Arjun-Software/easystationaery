@@ -1,0 +1,55 @@
+{% extends "admintemp/base.html" %}
+
+{% block content %}
+{% load static%}
+                <!-- end topbar -->
+                <div class="row column2 graph margin_bottom_30">
+                    <div class="col-md-l2 col-lg-12">
+                        <div class="white_shd full">
+                            <div class="full graph_head">
+                                <div class="heading1 margin_0">
+                                    <h2>Update New Item&#39;s</h2>
+                                </div>
+                            </div>
+                            <div class="full graph_revenue">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="content">
+                                            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+                                            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+                                            <form action="/panel/class/" method="post" class="form-group1">
+                                                {% csrf_token %}
+                                                <div class="form-group row">
+                                                    <label for="Class" class="col-4 col-form-label">Class</label>
+                                                    <div class="col-8">
+                                                    <input type="hidden" id="class_id" name="class_id" value="{{ classes.id  }}">    
+                                                    <input type="text" class="form-control" name="class_name" id="class_" value="{{classes.class_name}}">
+                                                    </div>
+                                                   
+                                                </div>
+                                                <div class="form-group row col-md-12">
+                                                    <label for="Class" class="col-4 col-form-label">School</label>
+                                                    <div class="col-8">
+                                                        <select id="school" name="school" class="custom-select">
+                                                        {% for sc in school %}
+                                                        <option value="{{ sc.id }},{{ sc.school_name }}">{{ sc.school_name }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group col-md-12">
+                                                    <div class="center mt-3">
+                                                        <button name="btn" type="submit" class="btn btn-primary" value="put" style="background-color: #1ed085;">Update</button>
+                                                        <button name="btn" type="submit" class="btn btn-danger" value="delete" style="background-color: #FF0000; margin-left:20px">Delete</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               {% endblock %}
+                

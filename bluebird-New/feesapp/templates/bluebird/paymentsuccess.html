@@ -1,0 +1,92 @@
+{% extends "bluebird/base.html" %}
+{% block content %}
+{% load static %}
+
+<body>
+    <style>
+        #success-main {
+            padding-top: 20px;
+            height: auto;
+        }
+
+        .success-details h4 {
+            color: #29964c;
+            margin: 0px;
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        span {
+            font-size: 18px;
+            font-weight: 500;
+            color: gray;
+        }
+
+        @keyframes zoominoutsinglefeatured {
+            0% {
+                transform: scale(1, 1);
+            }
+
+            50% {
+                transform: scale(1.1, 1.1);
+            }
+
+            100% {
+                transform: scale(1, 1);
+            }
+        }
+
+        .cardcontainer img {
+            animation: zoominoutsinglefeatured 1s infinite;
+        }
+    </style>
+
+    <div id="contact" class="contact_section">
+        <div class="contact_section_2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input_main">
+                            <div class="container">
+                                <center>
+                                    <div class="col-md-3"></div>
+                                    <div class="col-md-6">
+                                        <section id="success-main">
+                                            <div class="success-card">
+                                                <div class="cardcontainer">
+                                                    <!-- <img class="galleryImg" src="https://www.google.com/logos/doodles/2014/2014-winter-olympics-5710368030588928-hp.jpg"> -->
+                                                    <img src="{% static 'bluebird/img/payment-success.png' %}"
+                                                        width="150px">
+                                                </div>
+                                                <br>
+                                                <div class="success-details">
+                                                    <h4 style="color: #29964c;">Payment Successfull</h4>
+                                                    <span>Your Payement is completed </span><br>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </div>
+                                    <div class="col-md-3"></div>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        window.setTimeout(function () {
+
+            // Move to a new location or you can do something else
+            // window.location.href = "https://iconic.feesz/paymentpdf/{{order}}";
+            window.location.href = "https://bluebird.feeszone.com/paymentpdf/{{order}}";
+
+        }, 3000);
+
+    </script>
+
+
+
+    {% endblock %}

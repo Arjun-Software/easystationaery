@@ -1,0 +1,179 @@
+
+{% load static %}
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <!-- Favicons -->
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'bluebird/vendor/aos/aos.css' %}" rel="stylesheet">
+    <link href="{% static 'bluebird/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'bluebird/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+
+
+    <!-- Template Main CSS File -->
+    <link href="{% static 'bluebird/css/style.css' %}" rel="stylesheet">
+</head>
+<body id="mypdf">
+
+    <!-- banner end -->
+    <!-- choose start -->
+
+    <!-- contact start -->
+
+    <main class="background"  >
+        <!-- ======= admin-form Section ======= -->
+        <section id="contact" class="admin-form">
+            <div class="container" data-aos="fade-up">
+
+                {% comment %} <div class="section-title col-md-12">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src={% static 'bluebird/img/logo.png' %}>
+                        </div>
+                        <div class="col-md-8">
+                            <h2>Welcome to The Blue Bird High School</h2>
+                            <p></p>
+                        </div>
+                    </div>
+                </div> {% endcomment %}
+                <div class="row col-md-12">
+                    <section class="email-form">
+                        <div class="inner-box">
+                            <div class="header-section text-center">
+                                <img src={% static 'bluebird/img/logo.png' %}>
+                                <h5>The Blue Bird High School</h5>
+                            </div>
+                            <br>
+                            <script type="application/javascript" src="https://securegw.paytm.in//merchantpgpui/checkoutjs/merchants/BuleBi25513150470208.js"></script>
+                            <!-- <div>Already Register ?<a routerLink="/login" style="margin-left: 10px;">Login</a> </div> -->
+                            <div class="content">
+                                <div>
+                                    <div class="row details-row">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-bordered table-light border-warning">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Scholar No.</th>
+                                                        <th scope="col">{{scholar}}</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Student Name</td>
+                                                        <td>{{studentName}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Father's Name</td>
+                                                        <td>{{fatherName}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Mother's Name</td>
+                                                        <td>{{motherName}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Class / Section</td>
+                                                        <td>{{className}} </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Transaction ID </td>
+                                                        <td>{{transactionId}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Transaction Date </td>
+                                                        <td>{{payDate}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Month's</td>
+                                                        <td>{{month}} </td>
+                                                    </tr>
+                                                    {% if paymentStatus %} 
+                                                    <tr>
+                                                        <td>Payment </td>
+                                                        <td style="color:green" >Success</td>
+                                                    </tr>
+                                                    {% endif %} 
+                                                </tbody>
+
+                                            </table>
+                                            <div class="col-md-12 ">
+                                                <table class="table table-striped table-bordered table-light border-warning">
+                                                    <thead>
+                                                        <tr>
+
+                                                            <th scope="col">Fee Type</th>
+                                                            <th scope="col">Amount</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Fee Amount</td>
+                                                            <td>{{totalamount}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Late Fee</td>
+                                                            <td>{{latefee}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Total Fee</td>
+                                                            <td>{{amount}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="main-content text-center">
+                                    <button class="btn btn-lg btn-primary" id="btnval" onclick="printPDF();"> Download Reciept</button> 
+                                    <!-- <button class="button pay-confirm-btn" id="paytmWithPaytm">Confirm & pay</button> -->
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+        </section>
+        <!-- End Contact Us Section -->
+    </main>
+    <script src="{% static 'bluebird/js/jquery-3.0.0.min.js' %}"></script>
+    <script src="{% static 'bluebird/js/jquery.min.js' %}"></script>
+    <script src="{% static 'bluebird/js/jquery-1.11.1.min.js' %}"></script>                      
+    <script src="https://rawgit.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.min.js"></script>
+    <script>
+        function printPDF() {
+            console.log('hello')             
+            $("#btnval").hide()
+            window.print();
+            $("#btnval").show()
+        }
+    </script>
+    <script type='text/javascript'>
+        (function() {
+            if (window.localStorage) {
+                if (!localStorage.getItem('firstLoad')) {
+                    localStorage['firstLoad'] = true;
+                    window.location.reload();
+                } else
+                    localStorage.removeItem('firstLoad');
+            }
+        })();
+    </script>
+
+    <!-- Vendor JS Files -->
+    <script src="{% static 'bluebird/vendor/aos/aos.js' %}"></script>
+    <script src="{% static 'bluebird/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'bluebird/vendor/glightbox/js/glightbox.min.js' %}"></script>
+    <script src="{% static 'bluebird/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'bluebird/vendor/swiper/swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js' %}"></script>
+    <script src="{% static 'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js' %}"></script>
+    <!-- Template Main JS File -->
+    <script src="{% static 'bluebird/js/main.js' %}"></script>
+    </body>
+    
+    </html>

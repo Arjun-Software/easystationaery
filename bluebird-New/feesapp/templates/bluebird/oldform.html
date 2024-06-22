@@ -1,0 +1,279 @@
+{% extends "bluebird/base.html" %}
+{% block content %}
+{% load static%}
+{% load custom_filter %}
+
+<body>
+    <main class="background">
+        <!-- ======= admin-form Section ======= -->
+        <section id="contact" class="admin-form">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title col-md-12">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="{% static 'bluebird/img/logo.png' %}">
+                        </div>
+                        <div class="col-md-8">
+                            <h2>The Blue Bird High School</h2>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 mt-5 mt-lg-0 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+                        <form action="studentregistration/" method="post" role="form" class="email-form">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="name">Scholar No.</label>
+                                    <input type="text" name="scholar" class="form-control" id="scholar" placeholder="Scholar No." value="{{student.scolar_no}}" readonly>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="name">Your Name</label>
+                                    <input type="text" name="name" class="form-control" id="name" placeholder="Your Name"value="{{student.student_name}}" readonly>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6 mt-3 mt-md-0">
+                                    <label for="name">Father Name</label>
+                                    <input type="test" class="form-control" name="Father Name" id="Father Name" placeholder="Father Name"value="{{student.father_name}}" readonly>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="name">Mother Name</label>
+                                    <input type="text" class="form-control" name="Mother Name" id="Mother Name" placeholder="Mother Name"value="{{student.mother_name}}" readonly>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="name">Class</label>
+                                <input type="text" class="form-control" name="class" id="class" placeholder="Section"value="{{student.class_id}}" readonly>
+                                </div>
+                                {% if student.RTE|RTE %}
+                                <div class="form-group col-md-6 mt-3 mt-md-0">
+                                    <input type="checkbox" checked name="RTE" id="RTE" value="RTE" onclick="return false" style="color:green">RTE
+                                </div>
+                                </div>
+                                {% elif remMon.Jul|not_nan and  remMon.Aug|not_nan and remMon.Sep|not_nan and  remMon.Oct|not_nan and  remMon.Nov|not_nan and  remMon.Dec|not_nan  and  remMon.Jan|not_nan and  remMon.Feb|not_nan and  remMon.Mar|not_nan %}
+                                    <div class="form-group col-md-6 mt-3 mt-md-0">
+                                    <label style="color:green; margin-top:30px" >Thankyou your all month's fees are Paid</label>
+                                    </div>
+                                {% elif remMon.Jul|nan and  remMon.Aug|nan and remMon.Sep|nan and  remMon.Oct|nan and  remMon.Nov|nan and  remMon.Dec|nan %}
+                                <div class="form-group col-md-6 mt-3 mt-md-0">
+                                
+                                <label style="color:red; margin-top:30px" >Contact Your School Administrator</label>
+                                </div>
+                                {% else %}
+                            </div>
+                                <div class="row">
+                                    <div class="col-md-12 mt-6 mt-md-0 col-sm-6" id="frmContact">
+                                        <span class="details">Please Select Month</span>
+                                        <ul style="list-style: none;padding-left: 5px;">
+                                            {% if remMon.Jul|nan %}
+                                            <li>
+                                                <input class="July_click" type="checkbox" id="Jul"  value="{{feesStruct.Jul}},Jul" name="amount"/> July Fees
+                                                <div class="July_answer display-content">
+                                                    <input type="number" class="amount-input" value="{{feesStruct.Jul}}" onblur="findTotal()" id="July_amount " readonly />
+                                                </div>
+                                            </li>
+                                            {% endif %}
+                                            {% if remMon.Aug|nan %}
+                                            <li>
+                                                <input class="August_click" type="checkbox" id="Aug"  value="{{feesStruct.Aug}},Aug" name="amount"/> August Fees
+                                                <div class="August_answer display-content">
+                                                    <input type="number" class="amount-input" value="{{feesStruct.Aug}}" onblur="findTotal()" id="August_amount " readonly />
+                                                </div>
+                                            </li>
+                                            {% endif %}
+                                            {% if remMon.Sep|nan %}
+                                            <li>
+                                                <input class="September_click" type="checkbox" id="Sep" value="{{feesStruct.Sep}},Sep" name="amount"/> September Fees
+                                                <div class="September_answer display-content">
+                                                    <input type="number" class="amount-input" value="{{feesStruct.Sep}}" onblur="findTotal()" id="September_amount" readonly />
+                                                </div>
+                                            </li>
+                                            {% endif %}
+                                            {% if remMon.Oct|nan %}
+                                            <li>
+                                                <input class="October_click" type="checkbox" id="Oct" value="{{feesStruct.Oct}},Oct" name="amount"/> October Fees
+                                                <div class="October_answer display-content">
+                                                    <input type="number" class="amount-input" value="{{feesStruct.Oct}}" onblur="findTotal()" id="October_amount" readonly/>
+                                                </div>
+                                            </li>
+                                            {% endif %}
+                                            {% if remMon.Nov|nan %}
+                                            <li>
+                                                <input class="November_question" type="checkbox" id="Nov"  value="{{feesStruct.Nov}},Nov" name="amount"/> November Fees
+                                                <div class="November_answer display-content">
+                                                    <input type="number" class="amount-input" value="{{feesStruct.Nov}}" onblur="findTotal()" id="November_amount " readonly />
+                                                </div>
+                                            </li>
+                                            {% endif %}
+                                            {% if remMon.Dec|nan %}
+                                            <li>
+                                                <input class="December_click" type="checkbox" id="Dec" value="{{feesStruct.Dec}},Dec" name="amount"/> December Fees
+                                                <div class="December_answer display-content">
+                                                    <input type="number" class="amount-input" value="{{feesStruct.Dec}}" onblur="findTotal()" id="December_amount " readonly/>
+                                                </div>
+                                            </li>
+                                            {% endif %}
+                                            {% if remMon.Jan|nan %}
+                                            <li>
+                                                <input class="tution" type="checkbox" id="Jan"  value="{{feesStruct.Jan}},Jan" name="amount"/> January Fees
+                                                <input type="checkbox" hidden name="months" value="Jan">
+                                                <div class="january_answer display-content">
+                                                    <input type="number" class="amount-input" onblur="findTotal()" value="{{feesStruct.Jan}}" id="january_fees " readonly/>
+                                                </div>
+                                            </li>
+                                            {% endif %}
+                                            {% if remMon.Feb|nan %}
+                                            <li>
+                                                <input class="sport_click" type="checkbox" id="Feb" value="{{feesStruct.Feb}},Feb" name="amount"/> February Fees
+                                                <div class="february_answer display-content">
+                                                    <input type="number" class="amount-input" value="{{feesStruct.Feb}}" onblur="findTotal()" id="february_amount" readonly />
+                                                </div>
+                                            </li>
+                                            {% endif %}
+                                            {% if remMon.Mar|nan %}
+                                            <li>
+                                                <input class="activity_click" type="checkbox" id="Mar"  value="{{feesStruct.Mar}},Mar" name="amount"/> March Fees
+                                                <div class="March_answer display-content">
+                                                    <input type="number" class="amount-input" value="{{feesStruct.Mar}}" onblur="findTotal()" id="March_amount " readonly />
+                                                </div>
+                                            </li>
+                                            {% endif %}
+                                        </ul>
+                                        <input type="hidden" id="type" value={{ latefee.type }}>
+                                        <input type="hidden" id="fees" value={{ latefee.fees }}>
+                                        <input type="hidden" id="lastdate" value={{ latefee.lastdate }}>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div>
+                                    <input type="hidden" name="month" id="month">
+                                    <div class="row">
+                                        <div class="form-group col-md-4">
+                                            <label for="name">Total month Fees :</label> <br>
+                                            <input readonly type="text" style="padding: 6px !important; border-radius: 5px;" placeholder="Total month fees Amount" name="totalamount" id="totalamount" />
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="latefee">Late Fees :</label><br>
+                                            <input readonly type="text" style="padding: 6px !important; border-radius: 5px;" placeholder="Late fees" name="latefee" id="latefee" />
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="total"> Total :</label><br>
+                                            <input readonly type="text" style="padding: 6px !important; border-radius: 5px;" placeholder="Total Amount" name="total" id="total" />
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+                                <script>
+                                    var countChecked = function() {
+                                        var arr = [];
+                                        var mon = [];
+                                        var d= new Date();
+                                        const month = ["Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec","Jan","Feb","Mar"];
+                                        var premonthtot = 0;
+                                        var previousmon = [];
+                                        $.each($("input[name='amount']:checked"), function(){
+                                            arr.push($(this).val());
+                                        });
+                                        var n = d.getMonth()
+                                        if (n<3){
+                                            n=n+9
+                                        }
+                                        else{
+                                            n=n-3
+                                        }
+                                        for(var i = 0; i <=n; i++){
+                                            previousmon.push(month[i]);
+                                        }
+                                        var tot = 0;
+                                        for (var i = 0; i < arr.length; i++) {
+                                            a = arr[i].split(',')
+                                            mon.push(a[1])
+                                            tot = parseInt(arr[i]) + tot
+                                            if(previousmon.includes(mon[i])){
+                                                premonthtot = premonthtot+ parseInt(arr[i])
+                                            }
+                                        }
+                                        document.getElementById('month').value = mon.join()
+                                        document.getElementById('totalamount').value = tot;
+                                        const type = document.getElementById('type').value
+                                        const fees = document.getElementById('fees').value
+                                        const lastdate = document.getElementById('lastdate').value
+                                        
+                                        var latefee = 0;
+                                        if(type == "perday") {
+                                            if(d.getDate()>= lastdate){
+                                                for (var j = 0; j < mon.length; j++) {
+                                                    
+                                                    for (var i = 0; i < d.getDate()-lastdate; i++) {
+                                                        if(previousmon.includes(mon[j])){
+                                                            latefee = latefee+parseInt(fees)
+                                                        }
+                                                    }    
+                                                }
+                                            }
+                                        }
+                                        if(type == "percentage") {
+                                            for (var i = 0; i < mon.length; i++) {
+                                                if(d.getDate()>= lastdate){
+                                                    if(previousmon.includes(mon[i])){
+                                                        latefee = (premonthtot*parseInt(fees))/100
+                                                    }
+                                                }
+                                            } 
+                                        }
+                                        if(type == "fixamount") {
+                                            for (var i = 0; i < mon.length; i++) {
+                                                if(previousmon.includes(mon[i])){
+                                                    if(d.getDate()>= lastdate && mon[i] == month[n] ){
+                                                        latefee = latefee +parseInt(fees)
+                                                    }
+                                                    if(mon[i] != month[n]){
+                                                        latefee = latefee +parseInt(fees)
+                                                    }                                                    
+                                                }                                             
+                                            }
+                                        }
+                                        document.getElementById('latefee').value = latefee;
+                                        document.getElementById('total').value = latefee+tot;
+                                    };
+                                    
+                                    countChecked();
+                                    $( "input[type=checkbox]" ).on( "click", countChecked );
+                                     countChecked();
+                                    $( "input[type=checkbox]" ).on( "click", countChecked );
+                                    function clickme() {
+                                        tot = document.getElementById('total').value
+                                        console.log("hello",window.tot)
+                                        if(window.tot==0)
+                                            {
+                                                console.log("if")
+                                                document.getElementById("submit").disabled = true;
+                                                alert("please select month to proceed")
+                                                window.location.reload();
+                                            }
+                                        else
+                                        {
+                                            console.log("else")
+                                            document.getElementById("submit").disabled = false ;
+                                        }
+                                        }  
+                                </script>
+                                <div>
+                                    <button class="submit-btn" onclick="clickme();"  type="submit1" id="submit">Pay</button>
+                                </div>
+                        </div>
+                    {% endif %}
+                    </form>
+                </div>
+            </div>
+            </div>
+        </section>
+        <!-- End Contact Us Section -->
+    </main>
+{% endblock %}

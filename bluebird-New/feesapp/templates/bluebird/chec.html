@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Checkboxes</title>
+  <style>
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <form>
+    <label>
+      <input type="checkbox" id="checkbox1" onchange="toggleCheckbox('checkbox1', 'checkbox2')"> Checkbox 1
+    </label>
+
+    <div id="checkbox2Container" class="hidden">
+      <label>
+        <input type="checkbox" id="checkbox2" onchange="toggleCheckbox('checkbox2', 'checkbox3')"> Checkbox 2
+      </label>
+    </div>
+
+    <div id="checkbox3Container" class="hidden">
+      <label>
+        <input type="checkbox" id="checkbox3"> Checkbox 3
+      </label>
+    </div>
+  </form>
+
+  <script>
+    function toggleCheckbox(checkboxId, targetCheckboxId) {
+      var checkbox = document.getElementById(checkboxId);
+      var targetCheckboxContainer = document.getElementById(targetCheckboxId + 'Container');
+
+      if (checkbox.checked) {
+        targetCheckboxContainer.classList.remove('hidden');
+      } else {
+        targetCheckboxContainer.classList.add('hidden');
+        // Uncheck the target checkbox when the source checkbox is unchecked
+        document.getElementById(targetCheckboxId).checked = false;
+      }
+    }
+  </script>
+
+</body>
+</html>

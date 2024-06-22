@@ -1,0 +1,319 @@
+{% extends "admintemp/base.html" %} {% block content %} {% load static%}
+<!-- end topbar -->
+<div class="row column2 graph margin_bottom_30">
+    <div class="col-md-l2 col-lg-12">
+        <div class="white_shd full">
+            {% comment %} <div class="full graph_head">
+                <div class="heading1 margin_0">
+                    <h2>Enroll For New Student&#39;s</h2>
+                </div>
+            </div> {% endcomment %}
+            <div id="AddNewStudent" class="modal fade" role="dialog">
+                <div class="row modal-dialog">
+                    <div class="col-md-12 modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Add New Student</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                        </div>
+                        <div class="content modal-body">
+                            <link rel="stylesheet"
+                                href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+                            <link rel="stylesheet"
+                                href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                <div class="form-group row">
+                                    <div class="col-6">
+                                        <label for="scholar_no" class="mt-1">Scholar No.</label>
+                                        <input id="scholar_no" name="scholar_no" placeholder="Enter Your Scholar Number"
+                                            type="text" class="form-control" required>
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="student_name" class="mt-1">Student Name</label>
+                                        <input id="student_name" name="student_name" placeholder="Enter Your Name"
+                                            type="text" class="form-control" required>
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="father_name" class="mt-1">Father Name</label>
+                                        <input id="father_name" name="father_name" placeholder="Enter Your Father Name"
+                                            type="text" class="form-control" required>
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="mother_name" class="mt-1">Mother Name</label>
+                                        <input id="mother_name" name="mother_name" placeholder="Enter Your Mother Name"
+                                            type="text" class="form-control" required>
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="Class" class="mt-1">Class</label>
+                                        <select id="class" name="class" class="custom-select">
+                                            {% for class in classes %}
+                                            <option value="{{ class.id }}">{{ class.class_name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+
+                                    <div class="col-6">
+                                        <label class="col-6">RTE</label>
+                                        <div class="custom-control custom-checkbox custom-control-inline">
+                                            <input name="RTE" id="rte_0" type="checkbox" value="True">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <label class="col-6">Full Paid</label>
+                                        <div class="custom-control custom-checkbox custom-control-inline">
+                                            <input name="full_paid" id="coupon_question" type="checkbox"
+                                                class="coupon_question" value="True">
+                                        </div>
+                                    </div>
+                                </div>
+                                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+                                <script>
+                                    $(".coupon_question").click(function () {
+                                        if ($(this).is(":checked")) {
+                                            $(".answer").hide();
+
+                                        } else {
+                                            $(".answer").show();
+                                        }
+                                    });
+                                </script>
+                                <div class="answer">
+                                    <div class="form-group row">
+                                        <div class="col-md-3">
+                                            <label for="installment1" class="col-form-label">installment1</label>
+                                            <input id="installment1" name="installment1" type="number"
+                                                class="form-control">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="installment2" class="col-form-label">installment2</label>
+                                            <input id="installment2" name="installment2" type="number"
+                                                class="form-control">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="installment3" class="col-form-label">installment3</label>
+                                            <input id="installment3" name="installment3" type="number"
+                                                class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row modal-footer">
+                                    <div class="offset-4 col-8">
+                                        <button name="btn" type="submit" value="post" class="btn btn-primary"
+                                            style="background-color: #1ed085;">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="midde_cont">
+    <div class="container-fluid">
+        <!-- row -->
+        <div class="row">
+
+            <!-- table section -->
+            <div class="col-md-12">
+                <div class="white_shd full margin_bottom_30">
+                    <div class="full graph_head">
+                        <div class="row m-1">
+                            <h2 class="col-md-6">List Of Student's</h2>
+                            <div class="col-md-6">
+                                <button type="button" data-toggle="modal" data-target="#AddNewStudent"
+                                    class="btn btn-primary" style="background-color: #1ed085;">Add New Student</button>
+                                <button type="button" data-toggle="modal" data-target="#Student" class="btn btn-primary"
+                                    style="background-color: #1ed085;">Upload bulk</button>
+                                <a href="/panel/download_sample/Student"><button name="btn" type="download" value="post"
+                                        class="btn btn-primary" style="background-color: #1ed085;">Download
+                                        Sample</button></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table_section padding_infor_info">
+                        <div class="table-responsive-sm">
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                <div class="input-group mb-2">
+                                    <input type="number" class="form-control rounded" name="scholar_no"
+                                        placeholder="Enter Scholar" aria-label="Search"
+                                        aria-describedby="search-addon" />
+                                    <button type="submit" class="btn btn-outline-primary ml-2" name='btn'
+                                        value='search'>search</button>
+                                    <a href=""><button type="button" class="btn btn-outline-primary ml-2" name='btn'
+                                            value='search'>refresh</button></a>
+                                </div>
+                            </form>
+                            <table class="table table-striped table-hover table-bordered">
+
+                                <thead>
+                                    <tr>
+                                        <th>Scholar No.</th>
+                                        <th>Student Name</th>
+                                        <th>Father's Name</th>
+                                        <th>Mother's Name</th>
+                                        <th>Class</th>
+                                        <th>RTE</th>
+                                        <th>Full Paid</th>
+                                        <th>Edit/View More</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody id="myTable">
+                                    {% for student in students %}
+                                    <tr>
+                                        <td>{{ student.scolar_no }}</td>
+                                        <td>{{ student.student_name }}</td>
+                                        <td>{{ student.father_name }}</td>
+                                        <td>{{ student.mother_name }}</td>
+                                        <td>{{ student.class_id }}</td>
+                                        {% if student.RTE == True or student.RTE == "1" %}
+                                        <td><i class="fa fa-check green_color" aria-hidden="true"></i></td>
+                                        {% else %}
+                                        <td><i class="fa fa-times red_color" aria-hidden="true"></i></td>
+                                        {% endif %}
+                                        {% if student.Full_paid == True or student.Full_paid == "1" %}
+                                        <td><i class="fa fa-check green_color" aria-hidden="true"></i></td>
+                                        {% else %}
+                                        <td><i class="fa fa-times red_color" aria-hidden="true"></i></td>
+                                        {% endif %}
+                                        <td>
+                                            <a href="{{ student.scolar_no }}"><label
+                                                    class="fa fa-pencil-square-o blue_color p-2" name="update"
+                                                    aria-hidden="true"></label></a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            <h5 class="current">
+                                Page {{ students.number }} of {{ students.paginator.num_pages }}.
+                            </h5>
+                            <hr>
+                            <div class="pagination">
+                                <div class="form-group row">
+                                    <p class="step-links">
+                                        {% if students.has_previous %}
+                                        <a href="?page=1">&laquo; <button name="submit" type="submit"
+                                                class="btn btn-danger">First</button></a>
+                                        <a href="?page={{ students.previous_page_number }}"><button name="submit"
+                                                type="submit" class="btn btn-primary">previous</button></a> {% endif %}
+                                        {% comment %} <a href="?page={{ students.number }}"> {% endcomment %}
+                                            <input class="btn" type="text"
+                                                style="color: #000; text-align: center; width: 50px;" readonly
+                                                placeholder="{{ students.number }}">
+                                            {% comment %} </a> {% endcomment %}
+                                        {% if students.has_next %}
+                                        <a href="?page={{ students.next_page_number }}"><button name="next"
+                                                type="submit" class="btn btn-info">Next</button></a>
+                                        <a href="?page={{ students.paginator.num_pages }}"><button name="Last"
+                                                type="submit" class="btn btn-success">Last</button>
+                                            &raquo;</a> {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="popup1" class="overlay">
+    <div class="popup">
+        <h2>Please Contact your Administrator</h2>
+        <a class="close" href="#">&times;</a>
+
+    </div>
+</div>
+
+<div class="modal fade" id="Student" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Upload New Student Excel/csv</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/panel/data_upload/Student" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="file" class="col-form-label">Upload your File</label>
+                        <input type="file" class="form-control" id="file" name="file">
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button name="btn" type="submit" value="post" class="btn btn-primary">Submit</button>
+                </form>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+<script>
+    function myFunction() {
+        // Declare variables
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput1");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+<style>
+    #myInput {
+        background-image: url('/css/searchicon.png');
+        /* Add a search icon to input */
+        background-position: 10px 12px;
+        /* Position the search icon */
+        background-repeat: no-repeat;
+        /* Do not repeat the icon image */
+        width: 100%;
+        /* Full-width */
+        font-size: 16px;
+        /* Increase font-size */
+        padding: 12px 20px 12px 40px;
+        /* Add some padding */
+        border: 1px solid #ddd;
+        /* Add a grey border */
+        margin-bottom: 12px;
+        /* Add some space below the input */
+    }
+</style>
+{% endblock %}
